@@ -11,4 +11,4 @@ _UseGetOpt() {
         esac
   return 0
 } &&
-    complete -F _UseGetOpt -o filenames /usr/local/bin/launch-ide-inner launch-ide-inner --
+    complete -F _UseGetOpt -o filenames /usr/local/bin/launch-secret-editor launch-secret-editor --
