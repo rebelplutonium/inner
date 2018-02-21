@@ -6,4 +6,4 @@ pip install awscli --upgrade --user &&
     chmod 0644 /home/user/.ssh/known_hosts &&
     chmod 0600 /home/user/.ssh/{origin.id_rsa,upstream.id_rsa,report.id_rsa} &&
     mkdir /home/user/bin &&
-    mkdir /opt/docker/workspace/projects
+    mkdir /home/user/workspace/projects

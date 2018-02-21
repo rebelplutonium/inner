@@ -16,8 +16,8 @@ TEMP=$(mktemp -d) &&
     pass git config user.email "${USER_EMAIL}" &&
     pass git remote add origin https://github.com/${SECRETS_ORGANIZATION}/${SECRETS_REPOSITORY}.git &&
     ln -sf /usr/bin/post-commit ${HOME}/.password-store/.git/hooks/post-commit &&
-    ln -sf /home/user/.ssh /opt/docker/workspace/dot_ssh &&
-    ln -sf /home/user/bin /opt/docker/workspace &&
+    ln -sf /home/user/.ssh /home/user/workspace/dot_ssh &&
+    ln -sf /home/user/bin /home/user/workspace &&
     ls -1 /usr/local/bin | while read FILE
     do
         cp /usr/local/bin/${FILE} /home/user/bin/${FILE}.sh &&
