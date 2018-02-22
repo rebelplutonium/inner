@@ -3,7 +3,7 @@
 while [ ${#} -gt 0 ]
 do
     case ${1} in
-        --outer)
+        --use-host-docker)
             OUTER=true &&
                 shift
         ;;
