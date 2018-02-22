@@ -6,7 +6,7 @@
     --interactive \
     --tty \
     --rm \
-    --mount type=bind,source=/srv/docker,destination=/srv/docker,readonly=false \
+    --volume /srv/docker:/srv/docker \
     $(compgen -v | while read ENV; do echo --env ${ENV}; done) \
     --workdir $(pwd) \
     docker:${DOCKER_SEMVER}-ce \
