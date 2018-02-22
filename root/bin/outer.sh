@@ -7,6 +7,14 @@ do
             OUTER=true &&
                 shift
         ;;
+        --moniker)
+            MONIKER="${2}" &&
+                shift 2
+        ;;
+        --project-name)
+            PROJECT_NAME="${2}" &&
+                shift 2
+        ;;
         --outer-semver)
             OUTER_SEMVER="${2}" &&
                 shift 2
@@ -47,7 +55,8 @@ done &&
             --label expiry=$(date --date "now + 1 month" +%s) \
             --volume /var/run/docker.sock:/var/run/docker.sock:ro \
             rebelplutonium/outer:${OUTER_SEMVER} \
-                --project-name outer \
+                --project-name "${PROJECT_NAME}" \
+                --moniker "${MONIKER}" \
                 --user-name "${USER_NAME}" \
                 --user-email "${USER_EMAIL}" \
                 --gpg-secret-key "${GPG_SECRET_KEY}" \
@@ -72,7 +81,8 @@ done &&
             --label expiry=$(date --date "now + 1 month" +%s) \
             --volume /var/run/docker.sock:/var/run/docker.sock:ro \
             rebelplutonium/outer:${OUTER_SEMVER} \
-                --project-name outer \
+                --project-name "${PROJECT_NAME}" \
+                --moniker "${MONIKER}" \
                 --user-name "${USER_NAME}" \
                 --user-email "${USER_EMAIL}" \
                 --gpg-secret-key "${GPG_SECRET_KEY}" \
