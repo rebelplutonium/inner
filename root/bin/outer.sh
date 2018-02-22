@@ -7,6 +7,10 @@ do
             OUTER=true &&
                 shift
         ;;
+        --outer-semver)
+            OUTER_SEMVER="${2}" &&
+                shift 2
+        ;;
         --docker-semver)
             export DOCKER_SEMVER="${2}" &&
                 shift 2
@@ -42,7 +46,7 @@ done &&
             --rm \
             --label expiry=$(date --date "now + 1 month" +%s) \
             --volume /var/run/docker.sock:/var/run/docker.sock:ro \
-            rebelplutonium/outer:0.0.0 \
+            rebelplutonium/outer:${OUTER_SEMVER} \
                 --project-name outer \
                 --user-name "${USER_NAME}" \
                 --user-email "${USER_EMAIL}" \
@@ -67,7 +71,7 @@ done &&
             --rm \
             --label expiry=$(date --date "now + 1 month" +%s) \
             --volume /var/run/docker.sock:/var/run/docker.sock:ro \
-            rebelplutonium/outer:0.0.0 \
+            rebelplutonium/outer:${OUTER_SEMVER} \
                 --project-name outer \
                 --user-name "${USER_NAME}" \
                 --user-email "${USER_EMAIL}" \
