@@ -105,7 +105,7 @@ export PROJECT_NAME=hacker &&
         esac
     done &&
     cd $(create-docker-workspace) &&
-    CIDFILE=$(create-docker-id-file containers) &&
+    CIDFILE=$(create-docker-id-file --type containers) &&
     export PROJECT_NAME="${PROJECT_NAME}" &&
     docker \
         container \
