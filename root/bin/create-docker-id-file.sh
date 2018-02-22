@@ -16,4 +16,5 @@ do
     esac
 done &&
     ID_FILE=$(mktemp "/srv/docker/${TYPE}/XXXXXXXX") &&
-    rm -f ${ID_FILE}
+    rm -f ${ID_FILE} &&
+    echo ${ID_FILE}
