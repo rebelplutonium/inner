@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 
 ls -1 /srv/docker/containers | while read FILE
 do
