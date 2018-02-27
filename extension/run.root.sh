@@ -11,5 +11,4 @@ dnf update --assumeyes &&
     dnf install --assumeyes gnucash fuse-sshfs &&
     dnf install --assumeyes procps-ng &&
     sed -i "s+^# user_allow_other\$+user_allow_other+" /etc/fuse.conf &&
-    mkdir /srv/ids &&
-dnf clean all
+    dnf clean all

@@ -15,6 +15,6 @@ do
         ;;
     esac
 done &&
-    ID_FILE=$(mktemp "/srv/docker/${TYPE}/XXXXXXXX") &&
+    ID_FILE=$(mktemp "/home/user/workspace/docker/${TYPE}/XXXXXXXX") &&
     rm -f ${ID_FILE} &&
     echo ${ID_FILE}
