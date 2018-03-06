@@ -13,6 +13,10 @@ export CLOUD9_PORT=10604 &&
                 export CLOUD9_PORT="${2}" &&
                     shift 2
             ;;
+            --origin-id-rsa)
+                export ORIGIN_ID_RSA="$(pass show \"${2}\")" &&
+                    shift 2
+            ;;
             --origin-organization)
                 export ORIGIN_ORGANIZATION="${2}" &&
                     shift 2
@@ -46,7 +50,7 @@ export CLOUD9_PORT=10604 &&
                     shift
             ;;
             --expiry)
-                export EXPIRY=$(date --date ${2} +%s) &&
+                export EXPIRY=$(date --date "${2}" +%s) &&
                     shift 2
             ;;
             *)
@@ -57,7 +61,7 @@ export CLOUD9_PORT=10604 &&
             ;;
         esac
     done &&
-    CIDFILE=$(create-container-id --type container) &&
+    CIDFILE=$(create-docker-id-file --type containers) &&
     rm -f ${CIDFILE} &&
     cleanup(){
         docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
@@ -68,8 +72,6 @@ export CLOUD9_PORT=10604 &&
         container \
         create \
         --cidfile ${CIDFILE} \
-        --interactive \
-        --tty \
         --rm \
         --env PROJECT_NAME \
         --env CLOUD9_PORT \
@@ -91,4 +93,4 @@ export CLOUD9_PORT=10604 &&
         --label expiry=${EXPIRY} \
         rebelplutonium/secret-editor:1.0.0 &&
     docker network connect --alias ${PROJECT_NAME} main $(cat ${CIDFILE}) &&
-    docker container start --interactive $(cat ${CIDFILE})
+    docker container start $(cat ${CIDFILE})
