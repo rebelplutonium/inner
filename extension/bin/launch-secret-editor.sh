@@ -14,7 +14,7 @@ export CLOUD9_PORT=10604 &&
                     shift 2
             ;;
             --origin-id-rsa)
-                export ORIGIN_ID_RSA="$(pass show \"${2}\")" &&
+                export ORIGIN_ID_RSA="$(pass show ${2})" &&
                     shift 2
             ;;
             --origin-organization)
@@ -93,4 +93,4 @@ export CLOUD9_PORT=10604 &&
         --label expiry=${EXPIRY} \
         rebelplutonium/secret-editor:1.0.0 &&
     docker network connect --alias ${PROJECT_NAME} main $(cat ${CIDFILE}) &&
-    docker container start $(cat ${CIDFILE})
+    docker container start --interactive $(cat ${CIDFILE})
