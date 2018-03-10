@@ -11,4 +11,9 @@ dnf update --assumeyes &&
     dnf install --assumeyes gnucash fuse-sshfs &&
     dnf install --assumeyes procps-ng &&
     sed -i "s+^# user_allow_other\$+user_allow_other+" /etc/fuse.conf &&
+    ls -1 /home/user/extension/completion | while read SCRIPT
+    do
+        cp /home/user/extension/completion/${SCRIPT} /etc/bash_completion.d/${SCRIPT%.*} &&
+            chmod 0644 /etc/bash_completion.d/${SCRIPT%.*}
+    done &&
     dnf clean all
