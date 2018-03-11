@@ -61,7 +61,7 @@ export CLOUD9_PORT=10604 &&
             ;;
         esac
     done &&
-    CIDFILE=$(create-docker-id-file --type containers) &&
+    CIDFILE=$(create-docker-id-file) &&
     rm -f ${CIDFILE} &&
     cleanup(){
         docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
