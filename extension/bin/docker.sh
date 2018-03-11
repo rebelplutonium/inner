@@ -6,7 +6,7 @@
     --interactive \
     --tty \
     --rm \
-    --volume /home/user/workspace:/home/user/workspace \
+    --volume /opt/cloud9/workspace:/opt/cloud9/workspace \
     $(compgen -v | while read ENV; do echo --env ${ENV}; done) \
     --workdir $(pwd) \
     docker:${DOCKER_SEMVER}-ce \

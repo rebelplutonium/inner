@@ -27,7 +27,7 @@ DOT_SSH_CONFIG_FILE=$(mktemp ${HOME}/.ssh/config.d/XXXXXXXX) &&
                     --output text) &&
             aws ec2 delete-security-group --group-name ${SECURITY_GROUP} &&
             aws ec2 delete-key-pair --key-name ${KEY_NAME} &&
-            rm -rf /opt/docker/workspace/lieutenant
+            rm -rf /opt/cloud9/workspace/lieutenant
     } &&
     trap cleanup EXIT &&
     ssh-keygen -f ${KEY_FILE} -C "temporary lieutenant-ec2" -P "" &&
@@ -80,9 +80,9 @@ EOF
     echo MOUNTED 1 &&
     echo "find /dev/disk/by-uuid/ -mindepth 1 | while read FILE; do [ \$(readlink -f \${FILE}) == \"${DEVICE}\" ] && basename \${FILE} ; done | while read UUID; do echo \"UUID=\${UUID}       /data   ext4    defaults,nofail        0       2\" | sudo tee --append /etc/fstab ; done" | ssh lieutenant-ec2 sh &&
     echo FSTABBED &&
-    mkdir /home/user/workspace/lieutenant &&
+    mkdir /opt/cloud9/workspace/lieutenant &&
     echo MADE DATA DIRECTORY 2 &&
-    sshfs -o allow_other lieutenant-ec2:/data /home/user/workspace/lieutenant &&
+    sshfs -o allow_other lieutenant-ec2:/data ${HOME}/workspace/lieutenant &&
     echo MOUNTED 2 &&
-    /usr/bin/gnucash /home/user/gnucash/gnucash.gnucash &&
+    /usr/bin/gnucash /opt/cloud9/workspace/lieutenant/gnucash/gnucash.gnucash &&
     echo DONE

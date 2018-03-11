@@ -11,9 +11,11 @@ dnf update --assumeyes &&
     dnf install --assumeyes gnucash fuse-sshfs &&
     dnf install --assumeyes procps-ng &&
     sed -i "s+^# user_allow_other\$+user_allow_other+" /etc/fuse.conf &&
-    ls -1 /home/user/extension/completion | while read SCRIPT
+    ls -1 /opt/cloud9/extension/completion | while read SCRIPT
     do
-        cp /home/user/extension/completion/${SCRIPT} /etc/bash_completion.d/${SCRIPT%.*} &&
+        cp /opt/cloud9/extension/completion/${SCRIPT} /etc/bash_completion.d/${SCRIPT%.*} &&
             chmod 0644 /etc/bash_completion.d/${SCRIPT%.*}
     done &&
+    echo "user ALL=(ALL) NOPASSWD:SETENV:ALL" > /etc/sudoers.d/user &&
+    chmod 0444 /etc/sudoers.d/user &&
     dnf clean all

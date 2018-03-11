@@ -1,20 +1,6 @@
 #!/bin/sh
 
-while [ ${#} -gt 0 ]
-do
-    case "${1}" in
-        --type)
-            export TYPE="${2}" &&
-                shift 2
-        ;;
-        *)
-            echo Unknown Option &&
-                echo ${0} &&
-                echo ${@} &&
-                exit 64
-        ;;
-    esac
-done &&
-    ID_FILE=$(mktemp "/home/user/workspace/docker/${TYPE}/XXXXXXXX") &&
-    rm -f ${ID_FILE} &&
+mkdir --parents /opt/cloud9/workspace/docker &&
+    ID_FILE=$(mktemp /opt/cloud9/workspace/XXXXXXXX) &&
+    rm --force ${ID_FILE} &&
     echo ${ID_FILE}
