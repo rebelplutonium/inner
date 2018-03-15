@@ -8,4 +8,6 @@ pip install awscli --upgrade --user &&
     chmod 0600 ${HOME}/.ssh/config &&
     mkdir ${HOME}/.ssh/config.d &&
     chmod 0700 ${HOME}/.ssh/config.d &&
-    mkdir ${HOME}/bin
+    mkdir ${HOME}/bin &&
+    ln -sf /usr/local/bin/bash_completion ${HOME}/.bash_completion &&
+    mkdir ${HOME}/.bash_completion.d
