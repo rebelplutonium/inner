@@ -10,6 +10,8 @@ dnf update --assumeyes &&
     dnf install --assumeyes paperkey a2ps &&
     dnf install --assumeyes gnucash fuse-sshfs &&
     dnf install --assumeyes procps-ng &&
+    dnf install --assumeyes bind-utils &&
+    dnf install --assumeyes iputils &&
     sed -i "s+^# user_allow_other\$+user_allow_other+" /etc/fuse.conf &&
     ls -1 /opt/cloud9/extension/completion | while read SCRIPT
     do

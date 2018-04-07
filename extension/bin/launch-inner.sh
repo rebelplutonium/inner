@@ -27,13 +27,14 @@ do
         ;;
     esac
 done &&
+    export WORKSPACE_DIR=$(mktemp -d ${WORKSPACE_DIR}/docker/XXXXXXXX) &&
     docker \
         container \
         create \
         --name ${NAME} \
         --privileged \
         --env CLOUD9_PORT \
-        --env PROJECT_NAME \
+        --env PROJECT_NAME="${NAME}" \
         --env USER_NAME \
         --env USER_EMAIL \
         --env GPG_SECRET_KEY \
@@ -47,6 +48,7 @@ done &&
         --env DOCKER_HOST \
         --env DISPLAY \
         --env TARGET_UID \
+        --env WORKSPACE_DIR \
         --mount type=bind,source=/opt/cloud9/workspace,destination=/opt/cloud9/workspace,readonly=false \
         --mount type=bind,source=/srv/host/tmp/.X11-unix,destination=/tmp/.X11-unix,readonly=true \
         --label expiry=$(date --date "now + 1 month" +%s) \

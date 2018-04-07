@@ -16,12 +16,7 @@ TEMP=$(mktemp -d) &&
     pass git config user.email "${USER_EMAIL}" &&
     pass git remote add origin https://github.com/${SECRETS_ORGANIZATION}/${SECRETS_REPOSITORY}.git &&
     ln -sf /usr/bin/post-commit ${HOME}/.password-store/.git/hooks/post-commit &&
-    ln -sf ${HOME}/.ssh /opt/cloud9/workspace/dot_ssh &&
-    ln -sf ${HOME}/bin /opt/cloud9/workspace &&
+    ln -sf ${HOME}/.ssh ${WORKSPACE_DIR}/dot_ssh &&
+    ln -sf ${HOME}/bin ${WORKSPACE_DIR} &&
     pass git fetch origin master &&
-    pass git checkout master &&
-    ls -1 /opt/cloud9/extension/completion | while read SCRIPT
-    do
-        cp /opt/cloud9/extension/completion/${SCRIPT} ${HOME}/.bash_completion.d/${SCRIPT%.*} &&
-            chmod 0644 ${HOME}/.bash_completion.d/${SCRIPT%.*}
-    done
+    pass git checkout master
