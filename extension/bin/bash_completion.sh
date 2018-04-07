@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for ${BCFILE} in ${HOME}/.bash_completion.d/*
+for BCFILE in /opt/cloud9/extension/completion/*
 do
     source ${BCFILE}
 done
