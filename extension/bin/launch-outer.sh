@@ -36,7 +36,7 @@ export MONIKER=e4e46485-843a-4421-8563-00fd04693a4f &&
             ;;
         esac
     done &&
-    WORKDIR=$(mktemp -d ${WORKSPACE_DIR}/XXXXXXXX) &&
+    WORKDIR=$(mktemp -d ${CLOUD9_WORKSPACE}/XXXXXXXX) &&
     (cat > ${WORKDIR}/public.env <<EOF
 #!/bin/sh
 

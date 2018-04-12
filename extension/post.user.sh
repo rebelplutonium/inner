@@ -16,7 +16,7 @@ TEMP=$(mktemp -d) &&
     pass git config user.email "${USER_EMAIL}" &&
     pass git remote add origin https://github.com/${SECRETS_ORGANIZATION}/${SECRETS_REPOSITORY}.git &&
     ln -sf /usr/bin/post-commit ${HOME}/.password-store/.git/hooks/post-commit &&
-    ln -sf ${HOME}/.ssh ${WORKSPACE_DIR}/dot_ssh &&
-    ln -sf ${HOME}/bin ${WORKSPACE_DIR} &&
+    ln -sf ${HOME}/.ssh ${CLOUD9_WORKSPACE}/dot_ssh &&
+    ln -sf ${HOME}/bin ${CLOUD9_WORKSPACE} &&
     pass git fetch origin master &&
     pass git checkout master

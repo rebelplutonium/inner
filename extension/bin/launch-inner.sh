@@ -27,7 +27,7 @@ do
         ;;
     esac
 done &&
-    export WORKSPACE_DIR=$(mktemp -d ${WORKSPACE_DIR}/docker/XXXXXXXX) &&
+    export CLOUD9_WORKSPACE=$(mktemp -d ${CLOUD9_WORKSPACE}/docker/XXXXXXXX) &&
     docker \
         container \
         create \
@@ -48,7 +48,7 @@ done &&
         --env DOCKER_HOST \
         --env DISPLAY \
         --env TARGET_UID \
-        --env WORKSPACE_DIR \
+        --env CLOUD9_WORKSPACE \
         --mount type=bind,source=/opt/cloud9/workspace,destination=/opt/cloud9/workspace,readonly=false \
         --mount type=bind,source=/srv/host/tmp/.X11-unix,destination=/tmp/.X11-unix,readonly=true \
         --label expiry=$(date --date "now + 1 month" +%s) \
