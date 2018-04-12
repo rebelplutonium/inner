@@ -39,4 +39,5 @@ done &&
         --gpg-owner-trust gpg.owner.trust \
         --gpg2-owner-trust gpg2.owner.trust \
         --gpg-key-id gpg.key.id \
+        --expiry "now + 1 month" \
         --project-name "${PROJECT_NAME}"
