@@ -19,11 +19,11 @@ do
         ;;
     esac
 done &&
-    if [ ! -d ${WORKSPACE_DIR}/projects ]
+    if [ ! -d ${CLOUD9_WORKSPACE}/projects ]
     then
-        mkdir ${WORKSPACE_DIR}/projects
+        mkdir ${CLOUD9_WORKSPACE}/projects
     fi &&
-    PROJECT_DIR=$(mktemp -d ${WORKSPACE_DIR}/projects/XXXXXXXX) &&
+    PROJECT_DIR=$(mktemp -d ${CLOUD9_WORKSPACE}/projects/XXXXXXXX) &&
     git -C ${PROJECT_DIR} init &&
     git -C ${PROJECT_DIR} remote add origin https://github.com/nextmoose/${PROJECT_NAME}.git &&
     git -C ${PROJECT_DIR} fetch origin ${BRANCH_NAME} &&
