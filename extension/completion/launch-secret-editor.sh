@@ -1,6 +1,6 @@
 #!/bin/sh
 
-_UseGetOpt() {
+_UseGetOpt_launch_secret_editor() {
     local CUR &&
         COMPREPLY=() &&
         CUR=${COMP_WORDS[COMP_CWORD]} &&
@@ -11,4 +11,4 @@ _UseGetOpt() {
         esac
   return 0
 } &&
-    complete -F _UseGetOpt -o filenames /usr/local/bin/launch-secret-editor launch-secret-editor --
+    complete -F _UseGetOpt_launch_secret_editor -o filenames /usr/local/bin/launch-secret-editor launch-secret-editor --
