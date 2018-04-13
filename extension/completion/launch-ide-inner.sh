@@ -1,6 +1,6 @@
 #!/bin/sh
 
-_UseGetOpt() {
+_UseGetOpt_launch_ide_inner() {
     local CUR &&
         COMPREPLY=() &&
         CUR=${COMP_WORDS[COMP_CWORD]} &&
@@ -11,4 +11,4 @@ _UseGetOpt() {
         esac
   return 0
 } &&
-    complete -F _UseGetOpt -o filenames /usr/local/bin/launch-ide-inner launch-ide-inner --
+    complete -F _UseGetOpt_launch_ide_inner -o filenames /usr/local/bin/launch-ide-inner launch-ide-inner --

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-_UseGetOpt() {
+_UseGetOpt_create_docker_id_file() {
     local CUR &&
         COMPREPLY=() &&
         CUR=${COMP_WORDS[COMP_CWORD]} &&
@@ -11,4 +11,4 @@ _UseGetOpt() {
         esac
   return 0
 } &&
-    complete -F _UseGetOpt -o filenames /usr/local/bin/create-docker-id-file create-docker-id-file --
+    complete -F _UseGetOpt_create_docker_id_file -o filenames /usr/local/bin/create-docker-id-file create-docker-id-file --
