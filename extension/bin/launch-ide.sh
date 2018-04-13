@@ -243,7 +243,7 @@ export PROJECT_NAME=hacker &&
         --env GPG_KEY_ID \
         --env USER_NAME \
         --env USER_EMAIL \
-        --label
+        --label expiry=${EXPIRY} \
         rebelplutonium/github:0.0.8 &&
     docker network connect --alias ${PROJECT_NAME} main $(cat ${CIDFILE}) &&
     docker container start $(cat ${CIDFILE})
