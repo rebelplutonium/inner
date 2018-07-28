@@ -14,9 +14,8 @@ TEMP=$(mktemp -d) &&
     pass git init &&
     pass git config user.name "${USER_NAME}" &&
     pass git config user.email "${USER_EMAIL}" &&
-    pass git remote add origin https://github.com/${SECRETS_ORGANIZATION}/${SECRETS_REPOSITORY}.git &&
-    ln -sf /usr/bin/post-commit ${HOME}/.password-store/.git/hooks/post-commit &&
-    ln -sf ${HOME}/.ssh ${CLOUD9_WORKSPACE}/dot_ssh &&
-    ln -sf ${HOME}/bin ${CLOUD9_WORKSPACE} &&
-    pass git fetch origin master &&
-    pass git checkout master
+    pass git remote add upstream https://${SECRETS_HOST}/${SECRETS_ORGANIZATION}/${SECRETS_REPOSITORY}.git &&
+    ln -sf /opt/cloud9/bin/pre-commit ${HOME}/.password-store/.git/hooks/pre-commit &&
+    pass git remote set-url --push upstream no_push
+    pass git fetch upstream master &&
+    pass git checkout upstream/master
