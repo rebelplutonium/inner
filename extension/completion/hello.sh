@@ -6,7 +6,7 @@ _UseGetOpt_hello(){
         CUR=${COMP_WORDS[COMP_CWORD]} &&
         case ${CUR} in
             -*)
-                COMPREPLY=($(compgen -W "--greetee" -- ${CUR}}))
+                COMPREPLY=($(compgen -W "--greetee" -- ${CUR}))
                 ;;
         esac
 }

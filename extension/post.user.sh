@@ -12,8 +12,6 @@ TEMP=$(mktemp -d) &&
     rm -rf ${TEMP} &&
     pass init ${GPG_KEY_ID} &&
     pass git init &&
-    pass git config user.name "${USER_NAME}" &&
-    pass git config user.email "${USER_EMAIL}" &&
     pass git remote add upstream https://${SECRETS_HOST}/${SECRETS_ORGANIZATION}/${SECRETS_REPOSITORY}.git &&
     ln -sf /opt/cloud9/bin/pre-commit ${HOME}/.password-store/.git/hooks/pre-commit &&
     pass git remote set-url --push upstream no_push
