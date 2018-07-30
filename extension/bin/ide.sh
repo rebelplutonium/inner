@@ -132,7 +132,7 @@ export CLOUD9_PORT=10380 &&
     then
         echo Unspecified GPG2_OWNER_TRUST &&
             exit 68
-    if [ -z "${UPSTREAM_HOST}" ]
+    elif [ -z "${UPSTREAM_HOST}" ]
     then
         echo Unspecified UPSTREAM_HOST &&
             exit 69

@@ -1,1 +1,1 @@
-FROM rebelplutonium/cloud9:2.0.1
+FROM rebelplutonium/cloud9:2.0.2

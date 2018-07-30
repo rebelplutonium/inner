@@ -29,23 +29,23 @@ export CLOUD9_PORT=10604 &&
                 export GPG2_OWNER_TRUST="$(pass show ${2})" &&
                     shift 2
                 ;;
-            --UPSTREAM-host)
+            --origin-host)
                 export UPSTREAM_HOST="${2}" &&
                     shift 2
                 ;;
-            --UPSTREAM-port)
+            --origin-port)
                 export UPSTREAM_PORT="${2}" &&
                     shift 2
                 ;;
-            --UPSTREAM-id-rsa)
+            --origin-id-rsa)
                 export UPSTREAM_ID_RSA="$(pass show ${2})" &&
                     shift 2
                 ;;
-            --UPSTREAM-organization)
+            --origin-organization)
                 export UPSTREAM_ORGANIZATION="${2}" &&
                     shift 2
                 ;;
-            --UPSTREAM-repository)
+            --origin-repository)
                 export UPSTREAM_REPOSITORY="${2}" &&
                     shift 2
                 ;;
