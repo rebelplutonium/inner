@@ -30,31 +30,31 @@ export CLOUD9_PORT=10604 &&
                     shift 2
                 ;;
             --origin-host)
-                export UPSTREAM_HOST="${2}" &&
+                export ORIGIN_HOST="${2}" &&
                     shift 2
                 ;;
             --origin-port)
-                export UPSTREAM_PORT="${2}" &&
+                export ORIGIN_PORT="${2}" &&
                     shift 2
                 ;;
             --origin-id-rsa)
-                export UPSTREAM_ID_RSA="$(pass show ${2})" &&
+                export ORIGIN_ID_RSA="$(pass show ${2})" &&
                     shift 2
                 ;;
             --origin-organization)
-                export UPSTREAM_ORGANIZATION="${2}" &&
+                export ORIGIN_ORGANIZATION="${2}" &&
                     shift 2
                 ;;
             --origin-repository)
-                export UPSTREAM_REPOSITORY="${2}" &&
+                export ORIGIN_REPOSITORY="${2}" &&
                     shift 2
                 ;;
             --committer-name)
-                export USER_NAME="${2}" &&
+                export COMMITTER_NAME="${2}" &&
                     shift 2
                 ;;
             --committer-email)
-                export USER_NAME="${2}" &&
+                export COMMITER_NAME="${2}" &&
                     shift 2
                 ;;
             --read-write)
@@ -97,19 +97,19 @@ export CLOUD9_PORT=10604 &&
     then
         echo Missing GPG2_OWNER_TRUST &&
             exit 70
-    elif [ -z "${UPSTREAM_HOST}" ]
+    elif [ -z "${ORIGIN_HOST}" ]
     then
-        echo Missing UPSTREAM_HOST &&
+        echo Missing ORIGIN_HOST &&
             exit 71
-    elif [ -z "${UPSTREAM_PORT}" ]
+    elif [ -z "${ORIGIN_PORT}" ]
     then
-        echo Missing UPSTREAM_PORT &&
+        echo Missing ORIGIN_PORT &&
             exit 72
-    elif [ -z "${UPSTREAM_ORGANIZATION}" ]
+    elif [ -z "${ORIGIN_ORGANIZATION}" ]
     then
-        echo Missing UPSTREAM_ORGANIZATION &&
+        echo Missing ORIGIN_ORGANIZATION &&
             exit 73
-    elif [ -z "${COMMITER_NAME}" ]
+    elif [ -z "${COMMITTER_NAME}" ]
     then
         echo Missing COMMITTER_NAME &&
             exit 74
@@ -136,11 +136,12 @@ export CLOUD9_PORT=10604 &&
     fi &&
     CIDFILE=$(cidfile) &&
     cleanup(){
-        docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
+        sudo docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
         rm -f ${CIDFILE}
     } &&
     trap cleanup EXIT &&
-    docker \
+    sudo \
+        docker \
         container \
         create \
         --cidfile ${CIDFILE} \
@@ -151,11 +152,11 @@ export CLOUD9_PORT=10604 &&
         --env GPG2_SECRET_KEY \
         --env GPG_OWNER_TRUST \
         --env GPG2_OWNER_TRUST \
-        --env UPSTREAM_HOST \
-        --env UPSTREAM_PORT \
-        --env UPSTREAM_ORGANIZATION \
-        --env UPSTREAM_REPOSITORY \
-        --env UPSTREAM_ID_RSA \
+        --env ORIGIN_HOST \
+        --env ORIGIN_PORT \
+        --env ORIGIN_ORGANIZATION \
+        --env ORIGIN_REPOSITORY \
+        --env ORIGIN_ID_RSA \
         --env COMMITTER_NAME \
         --env COMMITTER_EMAIL \
         --env READ_WRITE \
@@ -163,7 +164,7 @@ export CLOUD9_PORT=10604 &&
         --label timestamp=${TIMESTAMP} \
         rebelplutonium/secret-editor:2.0.0 \
         &&
-    docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
-    docker network disconnect bridge $(cat ${CIDFILE}) &&
-    docker container start --interactive $(cat ${CIDFILE}) &&
+    sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
+    sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
+    sudo docker container start --interactive $(cat ${CIDFILE}) &&
     true

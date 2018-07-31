@@ -181,9 +181,10 @@ export CLOUD9_PORT=10380 &&
         echo Unspecified ISSUE_NUMBER &&
             exit 79
     fi &&
-    CIDFILE=$(create-docker-id-file) &&
+    CIDFILE=$(cidfile) &&
     export PROJECT_NAME="${PROJECT_NAME}" &&
-    docker \
+    sudo \
+        docker \
         container \
         create \
         --cidfile ${CIDFILE} \
@@ -214,6 +215,6 @@ export CLOUD9_PORT=10380 &&
         --env ISSUE_NUMBER \
         --label timestamp=${TIMESTAMP} \
         rebelplutonium/github:1.0.0 &&
-    docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
-    docker network disconnect bridge $(cat ${CIDFILE}) &&
-    docker container start $(cat ${CIDFILE})
+    sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
+    sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
+    sudo docker container start $(cat ${CIDFILE})
