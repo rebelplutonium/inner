@@ -5,6 +5,10 @@ export CLOUD9_PORT=10604 &&
     while [ ${#} -gt 0 ]
     do
         case ${1} in
+            --main-network)
+                export MAIN_NETWORK="${2}" &&
+                    shift 2
+                ;;
             --project-name)
                 export PROJECT_NAME="${2}" &&
                     shift 2
@@ -136,14 +140,8 @@ export CLOUD9_PORT=10604 &&
     fi &&
     CIDFILE=$(cidfile) &&
     VOLUME=$(sudo docker volume create --driver lvm --opt thinpool --opt size=1G) &&
-    cleanup(){
-        sudo docker container stop $(cat ${CIDFILE}) &&
-            sudo docker container rm --volumes $(cat ${CIDFILE}) &&
-            sudo rm -f ${CIDFILE} &&
-            sudo docker volume rm ${VOLUME}
-    } &&
-    trap cleanup EXIT &&
     sudo \
+        --preserve-env \
         docker \
         container \
         create \
@@ -165,9 +163,9 @@ export CLOUD9_PORT=10604 &&
         --env READ_ONLY \
         --label timestamp=${TIMESTAMP} \
         --volume ${VOLUME}:/opt/cloud9/workspace \
-        rebelplutonium/secret-editor:2.0.0 \
+        rebelplutonium/secret-editor:2.0.1 \
         &&
     sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
     sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
-    sudo docker container start --interactive $(cat ${CIDFILE}) &&
+    sudo docker container start $(cat ${CIDFILE}) &&
     true
