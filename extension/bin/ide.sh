@@ -219,7 +219,7 @@ export CLOUD9_PORT=10380 &&
         --env MASTER_BRANCH \
         --env ISSUE_NUMBER \
         --label timestamp=${TIMESTAMP} \
-        rebelplutonium/github:1.0.2 &&
+        rebelplutonium/github:1.0.3 &&
     sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
     sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
     sudo docker container start $(cat ${CIDFILE})
