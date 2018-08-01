@@ -163,7 +163,7 @@ export CLOUD9_PORT=10604 &&
         --env READ_ONLY \
         --label timestamp=${TIMESTAMP} \
         --volume ${VOLUME}:/opt/cloud9/workspace \
-        rebelplutonium/secret-editor:2.0.1 \
+        rebelplutonium/secret-editor:2.0.2 \
         &&
     sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
     sudo docker network disconnect bridge $(cat ${CIDFILE}) &&

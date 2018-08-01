@@ -168,7 +168,7 @@ export CLOUD9_PORT=10380 &&
     then
         echo Unspecified ORIGIN_REPOSITORY &&
             exit 75
-    elif [ -z "${COMMITER_NAME}" ]
+    elif [ -z "${COMMITTER_NAME}" ]
     then
         echo Unspecified COMMITTER_NAME &&
             exit 76
@@ -219,7 +219,7 @@ export CLOUD9_PORT=10380 &&
         --env MASTER_BRANCH \
         --env ISSUE_NUMBER \
         --label timestamp=${TIMESTAMP} \
-        rebelplutonium/github:1.0.1 &&
+        rebelplutonium/github:1.0.2 &&
     sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
     sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
     sudo docker container start $(cat ${CIDFILE})
