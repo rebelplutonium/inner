@@ -54,7 +54,7 @@ export CLOUD9_PORT=10604 &&
                     shift 2
                 ;;
             --committer-email)
-                export COMMITER_NAME="${2}" &&
+                export COMMITTER_EMAIL="${2}" &&
                     shift 2
                 ;;
             --read-write)
@@ -135,9 +135,12 @@ export CLOUD9_PORT=10604 &&
             exit 79
     fi &&
     CIDFILE=$(cidfile) &&
+    VOLUME=$(sudo docker volume create --driver lvm --opt thinpool --opt size=1G) &&
     cleanup(){
-        sudo docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
-        rm -f ${CIDFILE}
+        sudo docker container stop $(cat ${CIDFILE}) &&
+            sudo docker container rm --volumes $(cat ${CIDFILE}) &&
+            sudo rm -f ${CIDFILE} &&
+            sudo docker volume rm ${VOLUME}
     } &&
     trap cleanup EXIT &&
     sudo \
@@ -145,7 +148,6 @@ export CLOUD9_PORT=10604 &&
         container \
         create \
         --cidfile ${CIDFILE} \
-        --rm \
         --env PROJECT_NAME \
         --env CLOUD9_PORT \
         --env GPG_SECRET_KEY \
@@ -162,6 +164,7 @@ export CLOUD9_PORT=10604 &&
         --env READ_WRITE \
         --env READ_ONLY \
         --label timestamp=${TIMESTAMP} \
+        --volume ${VOLUME}:/opt/cloud9/workspace \
         rebelplutonium/secret-editor:2.0.0 \
         &&
     sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
