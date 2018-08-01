@@ -8,6 +8,10 @@ export CLOUD9_PORT=10380 &&
     while [ ${#} -gt 0 ]
     do
         case ${1} in
+            --main-network)
+                export MAIN_NETWORK="${2}" &&
+                    shift 2
+                ;;
             --project-name)
                 export PROJECT_NAME="${2}" &&
                     shift 2
@@ -97,7 +101,7 @@ export CLOUD9_PORT=10380 &&
                     shift 2
                 ;;
             --committer-email)
-                export USER_EMAIL="${2}" &&
+                export COMMITTER_EMAIL="${2}" &&
                     shift 2
                 ;;
             --master-branch)
@@ -164,7 +168,7 @@ export CLOUD9_PORT=10380 &&
     then
         echo Unspecified ORIGIN_REPOSITORY &&
             exit 75
-    elif [ -z "${USER_NAME}" ]
+    elif [ -z "${COMMITER_NAME}" ]
     then
         echo Unspecified COMMITTER_NAME &&
             exit 76
@@ -184,6 +188,7 @@ export CLOUD9_PORT=10380 &&
     CIDFILE=$(cidfile) &&
     export PROJECT_NAME="${PROJECT_NAME}" &&
     sudo \
+        --preserve-env \
         docker \
         container \
         create \
@@ -214,7 +219,7 @@ export CLOUD9_PORT=10380 &&
         --env MASTER_BRANCH \
         --env ISSUE_NUMBER \
         --label timestamp=${TIMESTAMP} \
-        rebelplutonium/github:1.0.0 &&
+        rebelplutonium/github:1.0.1 &&
     sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
     sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
     sudo docker container start $(cat ${CIDFILE})
