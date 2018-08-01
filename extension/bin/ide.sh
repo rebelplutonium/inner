@@ -4,7 +4,7 @@ export CLOUD9_PORT=10380 &&
     export UPSTREAM_PORT=22 &&
     export ORIGIN_PORT=22 &&
     export REPORT_PORT=22 &&
-    export MASTER_BRANCH=master &&
+    export UPSTREAM_BRANCH=master &&
     while [ ${#} -gt 0 ]
     do
         case ${1} in
@@ -56,6 +56,10 @@ export CLOUD9_PORT=10380 &&
                 export UPSTREAM_REPOSITORY="${2}" &&
                     shift 2
                 ;;
+            --upstream-branch)
+                export UPSTREAM_BRANCH="${2}" &&
+                    shift 2
+                ;;
             --origin-host)
                 export ORIGIN_HOST="${2}" &&
                     shift 2
@@ -76,9 +80,13 @@ export CLOUD9_PORT=10380 &&
                 export ORIGIN_REPOSITORY="${2}" &&
                     shift 2
                 ;;
+            --origin-branch)
+                export ORIGIN_BRANCH="${2}" &&
+                    shift 2
+                ;;
             --report-host)
                 export REPORT_HOST="${2}" &&
-                    shift 2
+                    shift 2 
                 ;;
             --report-port)
                 export REPORT_PORT="${2}" &&
@@ -102,14 +110,6 @@ export CLOUD9_PORT=10380 &&
                 ;;
             --committer-email)
                 export COMMITTER_EMAIL="${2}" &&
-                    shift 2
-                ;;
-            --master-branch)
-                export MASTER_BRANCH="${2}" &&
-                    shift 2
-                ;;
-            --issue-number)
-                export ISSUE_NUMBER="${2}" &&
                     shift 2
                 ;;
             *)
@@ -176,14 +176,6 @@ export CLOUD9_PORT=10380 &&
     then
         echo Unspecified COMMITTER_EMAIL &&
             exit 77
-    elif [ -z "${MASTER_BRANCH}" ]
-    then
-        echo Unspecified MASTER_BRANCH &&
-            exit 78
-    elif [ -z "${ISSUE_NUMBER}" ]
-    then
-        echo Unspecified ISSUE_NUMBER &&
-            exit 79
     fi &&
     CIDFILE=$(cidfile) &&
     export PROJECT_NAME="${PROJECT_NAME}" &&
@@ -219,7 +211,7 @@ export CLOUD9_PORT=10380 &&
         --env MASTER_BRANCH \
         --env ISSUE_NUMBER \
         --label timestamp=${TIMESTAMP} \
-        rebelplutonium/github:1.0.3 &&
+        rebelplutonium/github:1.0.4 &&
     sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
     sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
     sudo docker container start $(cat ${CIDFILE})
