@@ -196,11 +196,13 @@ export CLOUD9_PORT=10380 &&
         --env UPSTREAM_ID_RSA \
         --env UPSTREAM_ORGANIZATION \
         --env UPSTREAM_REPOSITORY \
+        --env UPSTREAM_BRANCH \
         --env ORIGIN_HOST \
         --env ORIGIN_PORT \
         --env ORIGIN_ID_RSA \
         --env ORIGIN_ORGANIZATION \
         --env ORIGIN_REPOSITORY \
+        --env ORIGIN_BRANCH \
         --env REPORT_HOST \
         --env REPORT_PORT \
         --env REPORT_ID_RSA \
