@@ -10,4 +10,4 @@ _UseGetOpt_launch_inner(){
                 ;;
         esac
 } &&
-    complete -F _UseGetOpt_ide -o filenames launch-inner
+    complete -F _UseGetOpt_launch_inner -o filenames launch-inner
