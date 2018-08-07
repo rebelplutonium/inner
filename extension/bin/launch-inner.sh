@@ -37,7 +37,7 @@ TIMESTAMP=$(date +%s) &&
                     shift 2
                 ;;
             --gpg-owner-trust)
-                export GPG_OWNER_TRUST="${2}" &&
+                export GPG_OWNER_TRUST="$(pass show ${2})" &&
                     shift 2
                 ;;
             --gpg2-secret-key)
@@ -45,7 +45,7 @@ TIMESTAMP=$(date +%s) &&
                     shift 2
                 ;;
             --gpg2-owner-trust)
-                export GPG2_OWNER_TRUST="${2}" &&
+                export GPG2_OWNER_TRUST="$(pass show ${2})" &&
                     shift 2
                 ;;
             --secrets-host)
@@ -127,7 +127,7 @@ TIMESTAMP=$(date +%s) &&
             exit 78
     fi &&
     CIDFILE=$(sudo mktemp /run/docker/unencrypted/XXXXXXXX) &&
-    rm -rf ${CIDFILE} &&
+    sudo rm -rf ${CIDFILE} &&
     sudo \
         docker \
     	container \
