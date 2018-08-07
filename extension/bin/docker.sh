@@ -1,6 +1,7 @@
 #!/bin/sh
 
-docker \
+sudo \
+    /usr/bin/docker \
     container \
     run \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
