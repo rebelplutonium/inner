@@ -23,6 +23,10 @@ do
             export ALIAS="${2}" &&
                 shift 2
             ;;
+        --expiry)
+            export EXPIRY=$(date --date "${2}" +%s) &&
+                shift 2
+            ;;
         *)
             echo Unknown Option &&
                 echo ${1} &&
@@ -33,7 +37,6 @@ do
     esac
 done &&
     TIMESTAMP=$(date +%s) &&
-    expiry=${EXPIRY} &&
     if [ -z "${CONFIGURATION_VOLUME}" ]
     then
         export CONFIGURATION_VOLUME=$(docker volume create --driver lvm --opt thinpool --opt size=1G --label timestamp=${TIMESTAMP} --label expiry=${EXPIRY})
@@ -43,6 +46,9 @@ done &&
     elif [ -z "${DATA_VOLUME}" ]
     then
         export DATA_VOLUME=$(docker volume create --driver lvm --opt thinpool --opt size=1G --label timestamp=${TIMESTAMP} --label expiry=${EXPIRY})
+    elif [ -z "${EXPIRY}" ]
+    then
+        export EXPIRY=$(date --date "now + 1 month" +%s)
     elif [ -z "${MAIN_NETWORK}" ]
     then
         echo Unspecified MAIN_NETWORK &&
@@ -61,16 +67,10 @@ done &&
         --mount type=volume,source=${LOGS_VOLUME},destination=/var/logs/gitlab\
         --mount type=volume,source=${DATA_VOLUME},destination=/var/opt/gitlab \
         --label timestamp=${TIMESTAMP} \
+        --label expiry=${EXPIRY} \
         gitlab/gitlab-ce:11.1.4-ce.0 \
         &&
     docker network connect --alias ${ALIAS} ${MAIN_NETWORK} $(cat ${CIDFILE})
     docker network disconnect bridge $(cat ${CIDFILE}) &&
     docker container start $(cat ${CIDFILE}) &&
     sudo rm -f ${CIDFILE}
-    
-    
-    
-    
-    
-    
-    
