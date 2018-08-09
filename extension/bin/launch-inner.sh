@@ -129,6 +129,7 @@ TIMESTAMP=$(date +%s) &&
     CIDFILE=$(sudo mktemp /run/docker/unencrypted/XXXXXXXX) &&
     sudo rm -rf ${CIDFILE} &&
     sudo \
+        --preserve \
         docker \
     	container \
     	create \

@@ -6,7 +6,7 @@ _UseGetOpt_launch_gitlab(){
         CUR=${COMP_WORDS[COMP_CWORD]} &&
         case ${CUR} in
             -*)
-                COMPREPLY=($(compgen -W "--greetee" -- ${CUR}))
+                COMPREPLY=($(compgen -W "--configuration-volume --logs-volume --data-volume --main-network --alias" -- ${CUR}))
                 ;;
         esac
 }
